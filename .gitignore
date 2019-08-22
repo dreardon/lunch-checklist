@@ -1,0 +1,11 @@
+api/venvs/*
+.DS_Store
+.vscode/
+.aws-sam/
+
+api/__pycache__/
+api/serverless-output.yaml
+
+web/.env
+web/node_modules/
+web/build

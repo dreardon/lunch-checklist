@@ -1,0 +1,46 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Lunch Checklist
+Parameters:
+  TimeoutParameter:
+    Type: Number
+    Default: 300
+
+Globals:
+  Function:
+    Timeout: !Ref TimeoutParameter
+    Runtime: python3.6
+    Environment:
+      Variables:
+          REGION_NAME: us-east-1
+
+  Api:
+    Cors:
+      AllowMethods: "'*'"
+      AllowHeaders: "'*'"
+      AllowOrigin: "'*'"
+      
+Resources:
+    
+    GetFoodListFunction:
+        Type: AWS::Serverless::Function
+        Properties:
+            Role: arn:aws:iam::679695450108:role/LunchChecklistLambdaRole
+            FunctionName: GetFoodLists
+            MemorySize: 320
+            Handler: food/foodSummary.foodLists
+            Events:
+                SummarySection:
+                    Type: Api
+                    Properties:
+                        Path: /getfood
+                        Method: get
+    
+Outputs:
+    BaseApi:
+      Description: "API Gateway endpoint URL for food functions"
+      Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod"
+
+    RESTApiId:
+        Description: "REST API ID"
+        Value: !Ref ServerlessRestApi
