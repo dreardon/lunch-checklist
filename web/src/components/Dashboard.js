@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from "react-router-dom"
+import $ from "jquery"
 
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -42,6 +43,9 @@ class Summary extends React.Component {
         for(var i=0; i<newMenu['menuCarbs'].length; i++){
             totalCarbs += newMenu['menuCarbs'][i].Carbohydrates;
         }
+        document.getElementById("foodFilter").value = "";
+        $('#foodFilter').keyup();
+        $('#foodFilter' ).focus();
         this.setState({ 
             selectedMenu: newMenu,
             totalCarbs: totalCarbs})
@@ -59,6 +63,7 @@ class Summary extends React.Component {
                         <div className="row text-center">
                             {/* <div className={this.state.loading ? 'col-lg-8 lmask ' : 'col-lg-8 '}> */}
                             <div className='col-lg-6'>
+                            <input className="form-control" id="foodFilter" type="text" placeholder="Search.." />
                             <table className="table">
                                 <thead>
                                     <tr>
@@ -67,7 +72,7 @@ class Summary extends React.Component {
                                         <th>Food</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="menuData">
                                 { this.state.menu.menuCarbs.map((item, i) => {
                                     return <tr key={i} className='foodChoice'>
                                             <td className=''><button onClick={i => this.addToCard(item)} className="btn btn-primary btn-sm">Add</button></td>
