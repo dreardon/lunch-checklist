@@ -152,4 +152,11 @@ hr {
 
 .foodChoiceName {
   text-align: left;
+  font-size: 14px;
+}
+
+.foodChoiceNumber {
+  text-align: left;
+  padding-left: 30px;
+  font-size: 14px;
 }

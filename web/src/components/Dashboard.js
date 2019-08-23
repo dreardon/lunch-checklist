@@ -91,8 +91,8 @@ class Summary extends React.Component {
                                         <div className="card-body col-lg-8">
                                             { this.state.selectedMenu.menuCarbs.map((item, i) => {
                                             return <div key={i} className='row foodChoice'>
-                                                    <div className='col-lg-4'>{item.Carbohydrates}</div>
-                                                    <div className='foodChoiceName col-lg-8'>{item.Food}</div>
+                                                    <div className='foodChoiceNumber col-lg-3'>{item.Carbohydrates}</div>
+                                                    <div className='foodChoiceName col-lg-9'>{item.Food}</div>
                                                 </div>
                                             })
                                             }
