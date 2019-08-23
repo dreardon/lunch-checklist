@@ -14,7 +14,8 @@ class Summary extends React.Component {
             lastUpdated: 'lastUpdated',
             menu: {"menuCarbs":[{"Food":"Meatballs","Carbohydrates":45},{"Food":"Tofu","Carbohydrates":35},{"Food":"Something Else","Carbohydrates":4},{"Food":"Ketchup","Carbohydrates":4},{"Food":"Cupcake","Carbohydrates":45},{"Food":"Blah Blah","Carbohydrates":23},{"Food":"Cookie","Carbohydrates":23}]},
             selectedMenu: {"menuCarbs":[]},
-            loading: true
+            loading: true,
+            totalCarbs: 0
         }
     }
 
@@ -37,9 +38,13 @@ class Summary extends React.Component {
     addToCard(row) {
         var newMenu = this.state.selectedMenu
         newMenu['menuCarbs'].push(row);
+        var totalCarbs = 0
+        for(var i=0; i<newMenu['menuCarbs'].length; i++){
+            totalCarbs += newMenu['menuCarbs'][i].Carbohydrates;
+        }
         this.setState({ 
-            selectedMenu: newMenu})
-        console.log(this.state.selectedMenu)
+            selectedMenu: newMenu,
+            totalCarbs: totalCarbs})
     }
 
     render() {
@@ -78,12 +83,12 @@ class Summary extends React.Component {
                             <div className='col-lg-6'>
                                 <div className="card">
                                     <div className="row">
-                                        <div class="card-header col-lg-12">
+                                        <div className="card-header col-lg-12">
                                             <div className="indexHeader">Liam's Meal Plan</div>
                                         </div>
                                     </div>
                                     <div className="row">
-                                        <div class="card-body col-lg-8">
+                                        <div className="card-body col-lg-8">
                                             { this.state.selectedMenu.menuCarbs.map((item, i) => {
                                             return <div key={i} className='row foodChoice'>
                                                     <div className='col-lg-4'>{item.Carbohydrates}</div>
@@ -92,8 +97,9 @@ class Summary extends React.Component {
                                             })
                                             }
                                         </div>
-                                        <div class="col-lg-4">
-                                            Math Totals
+                                        <div className="col-lg-4">
+                                           <div className="totalCarbHeader">Total Carbs</div>
+                                           <div className="totalCarbDetail">{this.state.totalCarbs}</div>
                                         </div>
                                     </div>
                                 </div>
