@@ -12,20 +12,34 @@ class Summary extends React.Component {
         super(props);
         this.state = {
             lastUpdated: 'lastUpdated',
+            menu: {"menuCarbs":[{"Food":"Meatballs","Carbohydrates":45},{"Food":"Tofu","Carbohydrates":35},{"Food":"Something Else","Carbohydrates":4},{"Food":"Ketchup","Carbohydrates":4},{"Food":"Cupcake","Carbohydrates":45},{"Food":"Blah Blah","Carbohydrates":23},{"Food":"Cookie","Carbohydrates":23}]},
+            selectedMenu: {"menuCarbs":[]},
             loading: true
         }
     }
 
+    loadData= () => {
+        var that = this
+        fetch(foodURL+'getfood')
+        .then((response) => response.json())
+        .then(function(response) {
+            that.setState({ 
+                loading: false,
+                menu: response});
+        })
+    }
+
 
     componentDidMount() {
-        fetch(foodURL+'getfood')
-        .then(function(response) {
-            return response.json();
-        })
-        .then(function(response) {
-            this.setState({ 
-                loading: false});
-        })
+        //this.loadData()
+    }
+
+    addToCard(row) {
+        var newMenu = this.state.selectedMenu
+        newMenu['menuCarbs'].push(row);
+        this.setState({ 
+            selectedMenu: newMenu})
+        console.log(this.state.selectedMenu)
     }
 
     render() {
@@ -38,11 +52,51 @@ class Summary extends React.Component {
                     </div>
                     <div className="container">
                         <div className="row text-center">
-                            <div className={this.state.loading ? 'col-lg-8 lmask ' : 'col-lg-8 '}>
-                                
+                            {/* <div className={this.state.loading ? 'col-lg-8 lmask ' : 'col-lg-8 '}> */}
+                            <div className='col-lg-6'>
+                            <table className="table">
+                                <thead>
+                                    <tr>
+                                        <th>Add</th>
+                                        <th>Carbs</th>
+                                        <th>Food</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                { this.state.menu.menuCarbs.map((item, i) => {
+                                    return <tr key={i} className='foodChoice'>
+                                            <td className=''><button onClick={i => this.addToCard(item)} className="btn btn-primary btn-sm">Add</button></td>
+                                            <td className=''>{item.Carbohydrates}</td>
+                                            <td className='foodChoiceName'>{item.Food}</td>
+                                        </tr>
+                                })
+                                }
+                                </tbody>
+                                </table>
                             </div>
-                            <div className={this.state.loading ? 'col-lg-4 lmask' : 'col-lg-4 '}>
-                                
+                            {/* <div className={this.state.loading ? 'col-lg-4 lmask' : 'col-lg-4 '}> */}
+                            <div className='col-lg-6'>
+                                <div className="card">
+                                    <div className="row">
+                                        <div class="card-header col-lg-12">
+                                            <div className="indexHeader">Liam's Meal Plan</div>
+                                        </div>
+                                    </div>
+                                    <div className="row">
+                                        <div class="card-body col-lg-8">
+                                            { this.state.selectedMenu.menuCarbs.map((item, i) => {
+                                            return <div key={i} className='row foodChoice'>
+                                                    <div className='col-lg-4'>{item.Carbohydrates}</div>
+                                                    <div className='foodChoiceName col-lg-8'>{item.Food}</div>
+                                                </div>
+                                            })
+                                            }
+                                        </div>
+                                        <div class="col-lg-4">
+                                            Math Totals
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

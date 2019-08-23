@@ -1,0 +1,16 @@
+{
+    "menuCarbs": [
+      {
+        "Food": "Meatballs",
+        "Carbohydrates": 45
+      },
+      {
+        "Food": "Tofu",
+        "Carbohydrates": 35
+      },
+      {
+        "Food": "Something Else",
+        "Carbohydrates": 4
+      }
+    ]
+  }
