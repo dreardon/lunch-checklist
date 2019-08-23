@@ -45,7 +45,7 @@ class Summary extends React.Component {
         }
         document.getElementById("foodFilter").value = "";
         $('#foodFilter').keyup();
-        $('#foodFilter' ).focus();
+        //$('#foodFilter' ).focus();
         this.setState({ 
             selectedMenu: newMenu,
             totalCarbs: totalCarbs})
