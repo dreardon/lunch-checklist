@@ -16,7 +16,8 @@ class Summary extends React.Component {
             menu: {"menuCarbs":[{"Food":"Meatballs","Carbohydrates":45},{"Food":"Tofu","Carbohydrates":35},{"Food":"Something Else","Carbohydrates":4},{"Food":"Ketchup","Carbohydrates":4},{"Food":"Cupcake","Carbohydrates":45},{"Food":"Blah Blah","Carbohydrates":23},{"Food":"Cookie","Carbohydrates":23}]},
             selectedMenu: {"menuCarbs":[]},
             loading: true,
-            totalCarbs: 0
+            totalCarbs: 0,
+            dosage: 0.0
         }
     }
 
@@ -36,6 +37,11 @@ class Summary extends React.Component {
         //this.loadData()
     }
 
+    calcInsulin(carbs,ratio) {
+        var result = carbs/ratio
+        return result
+    }
+
     addToCard(row) {
         var newMenu = this.state.selectedMenu
         newMenu['menuCarbs'].push(row);
@@ -46,9 +52,11 @@ class Summary extends React.Component {
         document.getElementById("foodFilter").value = "";
         $('#foodFilter').keyup();
         //$('#foodFilter' ).focus();
+        var dosage = this.calcInsulin(totalCarbs,25)
         this.setState({ 
             selectedMenu: newMenu,
-            totalCarbs: totalCarbs})
+            totalCarbs: totalCarbs,
+            dosage: dosage})
     }
 
     render() {
@@ -92,8 +100,8 @@ class Summary extends React.Component {
                                             <div className="indexHeader">Liam's Meal Plan</div>
                                         </div>
                                     </div>
-                                    <div className="row">
-                                        <div className="card-body col-lg-8">
+                                    <div className="row cardDetail">
+                                        <div className="col-lg-7">
                                             { this.state.selectedMenu.menuCarbs.map((item, i) => {
                                             return <div key={i} className='row foodChoice'>
                                                     <div className='foodChoiceNumber col-lg-3'>{item.Carbohydrates}</div>
@@ -102,9 +110,31 @@ class Summary extends React.Component {
                                             })
                                             }
                                         </div>
-                                        <div className="col-lg-4">
-                                           <div className="totalCarbHeader">Total Carbs</div>
-                                           <div className="totalCarbDetail">{this.state.totalCarbs}</div>
+                                        <div className="col-lg-5">
+                                           <div className="row">
+                                                <label className="col-sm-7 insulinRatioLabel">Carbs/Unit: </label>
+                                                <div className="col-sm-5">
+                                                    <input type="text" className="form-control form-control-sm insulinRatioValue" placeholder="25"/>
+                                                </div>
+                                            </div>
+                                            <div className="row">
+                                                <label className="col-sm-7 carbTotalsLabel">
+                                                    Total Carbs: 
+                                                </label>
+                                                <div className="col-sm-5 totalCarbDetail">
+                                                    {this.state.totalCarbs}
+                                                </div>
+                                            </div>
+                                            <div className="row">
+                                                <div className="col-sm-12 amountToAdministerHeader">
+                                                   Amount to Dose
+                                                </div>
+                                            </div>
+                                            <div className="row">
+                                                <div className="col-sm-12 amountToAdministerDetail">
+                                                   {this.state.dosage.toFixed(1)} Units
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

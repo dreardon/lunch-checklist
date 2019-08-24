@@ -127,9 +127,7 @@ html, body { height: 100%; }
     repeating-linear-gradient(0deg, transparent, transparent 1.5rem, #DDD 1px, #DDD calc(1.5rem + 1px));
   box-shadow: 1px 1px 3px rgba(0,0,0,.25);
   height: 300px;
-  width: 500px;
-
-  margin: auto;
+  width: 480px;
   position: relative;
   top: 50%;
   transform: translateY(-50%);
@@ -140,14 +138,13 @@ html, body { height: 100%; }
   margin-bottom: -8px;
 }
 
-.foodChoice {
-  margin-top:4px;
-  margin-bottom:5px;
+.cardDetail {
+  font-size: 14px;
 }
 
-hr {
-  margin-top: 0px;
-  margin-bottom: 0px;
+.foodChoice {
+  margin-top:0px;
+  margin-bottom:5px;
 }
 
 .foodChoiceName {
@@ -159,4 +156,47 @@ hr {
   text-align: left;
   padding-left: 30px;
   font-size: 14px;
+}
+
+.totalCarbHeader {
+  text-align: left;
+}
+
+.carbTotalsLabel {
+  text-align: left;
+  margin-top:0px;
+  margin-bottom:5px;
+}
+
+.totalCarbDetail {
+  text-align: left;
+  margin-top:0px;
+  margin-bottom:5px;
+}
+
+.insulinRatioLabel {
+  text-align: left;
+  margin-top:0px;
+  margin-bottom:5px;
+}
+
+.insulinRatioValue {
+  text-align: left;
+  margin-top:0px;
+  margin-bottom:5px;
+  height: 24px;
+  width: 67px;
+  float:right;
+}
+
+.amountToAdministerHeader {
+  text-align: center;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.amountToAdministerDetail {
+  text-align: center;
+  font-weight: bold;
+  margin-top: 4px;
 }
