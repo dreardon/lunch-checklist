@@ -200,3 +200,12 @@ html, body { height: 100%; }
   font-weight: bold;
   margin-top: 4px;
 }
+
+.notes {
+  float:left;
+}
+
+.notesText {
+  resize:none;
+  font-size: 11px;
+}

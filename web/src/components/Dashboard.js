@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from "react-router-dom"
 import $ from "jquery"
+import { FormGroup, FormControl } from "react-bootstrap";
+
 
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -40,6 +42,13 @@ class Summary extends React.Component {
     calcInsulin(carbs,ratio) {
         var result = carbs/ratio
         return result
+    }
+
+    changeRatio(e) {
+        console.log(this.refs.ratio.value)
+        var dosage = this.calcInsulin(this.refs.ratio.value)
+        this.setState({ 
+            dosage: dosage})
     }
 
     addToCard(row) {
@@ -114,7 +123,22 @@ class Summary extends React.Component {
                                            <div className="row">
                                                 <label className="col-sm-7 insulinRatioLabel">Carbs/Unit: </label>
                                                 <div className="col-sm-5">
-                                                    <input type="text" className="form-control form-control-sm insulinRatioValue" placeholder="25"/>
+                                                    {/* <Input type="text" onKeyPress={this.changeRatio} className="form-control form-control-sm insulinRatioValue" placeholder="25" /> */}
+                                                    {/* <input type="text" onKeyPress={this.changeRatio} className="form-control form-control-sm insulinRatioValue" placeholder="25"/> */}
+                                                    <FormGroup>
+                                                            <FormControl
+                                                                id="insulinRatio"
+                                                                placeholder="25"
+                                                                type="input"
+                                                                ref="ratio"
+                                                                onKeyPress={this.changeRatio.bind(this)} 
+                                                                className="form-control form-control-sm insulinRatioValue"
+                                                            />
+                                                    </FormGroup>
+                                                    
+                                               
+                                               
+                                               
                                                 </div>
                                             </div>
                                             <div className="row">
@@ -133,6 +157,11 @@ class Summary extends React.Component {
                                             <div className="row">
                                                 <div className="col-sm-12 amountToAdministerDetail">
                                                    {this.state.dosage.toFixed(1)} Units
+                                                </div>
+                                            </div>
+                                            <div className="row">
+                                                <div className="col-sm-12 notes">
+                                                     <textarea className="form-control form-control-sm notesText"  rows="7"></textarea>
                                                 </div>
                                             </div>
                                         </div>
