@@ -45,8 +45,7 @@ class Summary extends React.Component {
     }
 
     changeRatio(e) {
-        console.log(this.refs.ratio.value)
-        var dosage = this.calcInsulin(this.refs.ratio.value)
+        var dosage = this.calcInsulin(this.state.totalCarbs,this.refs.ratio.value)
         this.setState({ 
             dosage: dosage})
     }
@@ -131,7 +130,7 @@ class Summary extends React.Component {
                                                                 placeholder="25"
                                                                 type="input"
                                                                 ref="ratio"
-                                                                onKeyPress={this.changeRatio.bind(this)} 
+                                                                onChange={this.changeRatio.bind(this)} 
                                                                 className="form-control form-control-sm insulinRatioValue"
                                                             />
                                                     </FormGroup>
